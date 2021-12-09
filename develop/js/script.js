@@ -5,7 +5,7 @@ var cityInputEl=document.querySelector("#city");
 var weatherContainerEl=document.querySelector("#current-weather-container");
 var citySearchInputEl=document.querySelector("#searched-city");
 var fcstTitle=document.querySelector("#fcst");
-var fcstContainerEl=document.querySelector("#five-day-fcst");
+var fcstContainerEl=document.querySelector("#five-day-container");
 var pastSearchBtnEl=document.querySelector("#past-search-btns")
 
 var formSubmitHandler = function(event) {
@@ -31,7 +31,7 @@ var saveSearch = function() {
 // Weather data API & API Key 
 var getCityWeather = function(city) {
     var apiKey = "a7313793ab38e20ed2769bb38348d413"
-    var apiURL = 'api.openweathermap.org/data/2.5/weather?q=${city name}&units=imperial&appid=${API key}'
+    var apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`
 
     fetch(apiURL)
     .then(function(response) {
@@ -50,12 +50,12 @@ var displayWeather = function(weather, searchCity) {
 
     // Data element
     var currentDate = document.createElement("span")
-    currentDate.textContent = " (" + moment(weather.dt.value).format("MMM D, YYY") + ") ";
+    currentDate.textContent = " (" + moment(weather.dt.value).format("dddd, MMM D, YYYY") + ") ";
     citySearchInputEl.appendChild(currentDate);
 
     // Image Element
     var weatherIcon = document.createElement("img")
-    weatherIcon.setAttribute("src", 'https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png');
+    weatherIcon.setAttribute("src", `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`);
     citySearchInputEl.appendChild(weatherIcon);
 
     // Temperature data Element
@@ -81,12 +81,12 @@ var displayWeather = function(weather, searchCity) {
 
     var lat = weather.coord.lat;
     var lon = weather.coord.lon;
-    getUvIndex(lat, lon)
+    getUvIndex(lat,lon)
 }
 
 var getUvIndex = function(lat,lon) {
     var apiKey = "a7313793ab38e20ed2769bb38348d413"
-    var apiURL = 'api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon}`
+    var apiURL = `https://api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon}`
     fetch(apiURL)
     .then(function(response) {
         response.json().then(function(data) {
@@ -121,3 +121,8 @@ var displayUvIndex = function(index) {
     // append to current weather
     weatherContainerEl.appendChild(uvIndexEl);
 }
+
+// Event Listeners
+
+cityFormEl.addEventListener("submit", formSubmitHandler);
+pastSearchBtnEl.addEventListener("click", pastSearchHandler);
