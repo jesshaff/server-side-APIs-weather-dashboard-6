@@ -83,3 +83,17 @@ var displayWeather = function(weather, searchCity) {
     var lon = weather.coord.lon;
     getUvIndex(lat, lon)
 }
+
+var getUvIndex = function(lat,lon) {
+    var apiKey = "a7313793ab38e20ed2769bb38348d413"
+    var apiURL = 'api.openweathermap.org/data/2.5/uvi?appid=${apiKey}&lat=${lat}&lon=${lon}`
+    fetch(apiURL)
+    .then(function(response) {
+        response.json().then(function(data) {
+            displayUvIndex(data)
+            console.log(data)
+        });
+    });
+    console.log(lat);
+    console.log(lon);
+}
