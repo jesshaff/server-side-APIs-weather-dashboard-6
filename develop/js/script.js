@@ -40,3 +40,46 @@ var getCityWeather = function(city) {
         });
     });
 };
+
+var displayWeather = function(weather, searchCity) {
+    // clear previous content
+    weatherContainerEl.textContent = "";
+    citySearchInputEl.textContent = searchCity;
+
+    console.log(weather);
+
+    // Data element
+    var currentDate = document.createElement("span")
+    currentDate.textContent = " (" + moment(weather.dt.value).format("MMM D, YYY") + ") ";
+    citySearchInputEl.appendChild(currentDate);
+
+    // Image Element
+    var weatherIcon = document.createElement("img")
+    weatherIcon.setAttribute("src", 'https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png');
+    citySearchInputEl.appendChild(weatherIcon);
+
+    // Temperature data Element
+    var temperatureEl = document.createElement("span");
+    temperatureEl.textContent = "Temperature: " + weather.main.temp + " °F";
+    temperatureEl.classList = "list-group-item"
+
+    // Humidity data Element
+    var humidityEl = document.createElement("span");
+    humidityEl.textContent = "Humidity: " + weather.main.humidity + " %";
+    humidityEl.classList = "list-group-item"
+
+    // Wind data Element
+    var windEl = document.createElement("span");
+    windEl.textContent = "Wind Speed: " + weather.wind.speed + " MPH";
+    windEl.classList = "list-group-item"
+
+    // append to containers 
+
+    weatherContainerEl.appendChild(temperatureEl);
+    weatherContainerEl.appendChild(humidityEl);
+    weatherContainerEl.appendChild(windEl);
+
+    var lat = weather.coord.lat;
+    var lon = weather.coord.lon;
+    getUvIndex(lat, lon)
+}
