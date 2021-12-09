@@ -9,7 +9,8 @@ var fcstContainerEl=document.querySelector("#five-day-fcst");
 var pastSearchBtnEl=document.querySelector("#past-search-btns")
 
 var formSubmitHandler = function(event) {
-    var city = cityInputEl.ariaValueMax.trim();
+    event.preventDefault();
+    var city = cityInputEl.value.trim();
     if(city) {
         getCityWeather(city);
         get5Day(city);
@@ -20,5 +21,22 @@ var formSubmitHandler = function(event) {
         alert("Please enter a city!");
     }
     saveSearch();
-    pastSearchBtnEl(city);
+    pastSearch(city);
 }
+
+var saveSearch = function() {
+    localStorage.setItem("cities", JSON.stringify(cities));
+};
+
+// Weather data API & API Key 
+var getCityWeather = function(city) {
+    var apiKey = "a7313793ab38e20ed2769bb38348d413"
+    var apiURL = 'api.openweathermap.org/data/2.5/weather?q=${city name}&units=imperial&appid=${API key}'
+
+    fetch(apiURL)
+    .then(function(response) {
+        response.json().then(function(data) {
+            displayWeather(data, city);
+        });
+    });
+};
