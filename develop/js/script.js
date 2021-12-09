@@ -1,4 +1,4 @@
-var cities [];
+var cities = [];
 
 var cityFormEl=document.querySelector("#city-search-form");
 var cityInputEl=document.querySelector("#city");
@@ -96,4 +96,28 @@ var getUvIndex = function(lat,lon) {
     });
     console.log(lat);
     console.log(lon);
+}
+
+var displayUvIndex = function(index) {
+    var uvIndexEl = document.createElement("div");
+    uvIndexEl.textContent = "UV Index: "
+    uvIndexEl.classList = "list-group-item"
+
+    uvIndexVal = document.createElement("span")
+    uvIndexVal.textContent = index.value
+
+    if(index.value <=2) {
+        uvIndexVal.classList = "favorable"
+    }
+    else if(index.value >2 && index.value<=8) {
+        uvIndexVal.classList = "moderate"
+    }
+    else if(index.value >8) {
+        uvIndexVal.classList = "severe"
+    };
+
+    uvIndexEl.appendChild(uvIndexVal);
+
+    // append to current weather
+    weatherContainerEl.appendChild(uvIndexEl);
 }
