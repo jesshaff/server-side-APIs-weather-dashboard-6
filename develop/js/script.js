@@ -178,7 +178,7 @@ var display5Day = function(weather) {
 var pastSearch = function(pastSearch) {
     pastSearchEl = document.createElement("button");
     pastSearchEl.textContent = pastSearch;
-    pastSearchEl.classList = "d-slex w-100 btn-dark border p-2";
+    pastSearchEl.classList = "d-flex w-100 btn-dark border p-2";
     pastSearchEl.setAttribute("data-city", pastSearch)
     pastSearchEl.setAttribute("type", "submit");
 

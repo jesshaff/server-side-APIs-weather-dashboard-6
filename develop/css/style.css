@@ -1,4 +1,44 @@
-.dropdown-content {
-    width: 145%;
-    text-align: center;
-} 
+
+body {
+    background-image: url('/assets/weather-background.jpeg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+header {
+    background-color: white;
+}
+
+.search-column {
+    background-color: #d3d3d3;
+}
+
+.list-group-item {
+    line-height: 0.5;
+    border: none;
+}
+
+.card-body {
+    flex: auto;
+}
+
+span.sever {
+    padding: 3px;
+    background-color: red;
+}
+
+span.moderate {
+    padding: 3px;
+    background-color: yellow;
+}
+
+span.favorable {
+    padding: 3px;
+    background-color: green;
+}
+
+.container-fluid {
+    align-content:flex-end;
+    flex-wrap: wrap;
+}
