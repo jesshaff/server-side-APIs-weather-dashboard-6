@@ -124,7 +124,7 @@ var displayUvIndex = function(index) {
 
 var get5Day = function(city) {
     var apiKey = "a7313793ab38e20ed2769bb38348d413"
-    var apiURL = 'https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${apiKey}'
+    var apiURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${apiKey}`
 
     fetch(apiURL)
     .then(function(response) {
@@ -142,8 +142,11 @@ var display5Day = function(weather) {
         for(var i=5; i < fcst.length; i=i+8) {
             var dailyFcst = fcst[i];
 
+            var fcstEl = document.createElement("div");
+            fcstEl.classList = "card bg-primary text-light m2";
+
             // Create date element 
-            var fcstEl = document.createElement("h5")
+            var fcstDate = document.createElement("h5")
             fcstDate.textContent = moment.unix(dailyFcst.dt).format("MMM D, YYYY");
             fcstDate.classList = "card-header text-center"
             fcstEl.appendChild(fcstDate);
@@ -151,7 +154,7 @@ var display5Day = function(weather) {
             // Create image element
             var weatherIcon = document.createElement("img")
             weatherIcon.classList = "card-body text-center";
-            weatherIcon.setAttribute("src, 'https://openweathermap.org/img/wn/${dailyForecast.weather[0].icon}@2x.png'");
+            weatherIcon.setAttribute("src", `https://openweathermap.org/img/wn/${dailyFcst.weather[0].icon}@2x.png`);
 
             fcstEl.appendChild(weatherIcon);
 
@@ -170,6 +173,24 @@ var display5Day = function(weather) {
 
             fcstContainerEl.appendChild(fcstEl);
         }
+}
+
+var pastSearch = function(pastSearch) {
+    pastSearchEl = document.createElement("button");
+    pastSearchEl.textContent = pastSearch;
+    pastSearchEl.classList = "d-slex w-100 btn-dark border p-2";
+    pastSearchEl.setAttribute("data-city", pastSearch)
+    pastSearchEl.setAttribute("type", "submit");
+
+    pastSearchBtnEl.prepend(pastSearchEl);
+}
+
+var pastSearchHandler = function(event) {
+    var city = event.target.getAttribute("data-city")
+    if(city) {
+        getCityWeather(city);
+        get5Day(city);
+    }
 }
 
 // Event Listeners
