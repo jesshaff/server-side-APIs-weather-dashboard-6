@@ -122,7 +122,56 @@ var displayUvIndex = function(index) {
     weatherContainerEl.appendChild(uvIndexEl);
 }
 
-// Event Listeners
+var get5Day = function(city) {
+    var apiKey = "a7313793ab38e20ed2769bb38348d413"
+    var apiURL = 'https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${apiKey}'
 
+    fetch(apiURL)
+    .then(function(response) {
+        response.json().then(function(data){
+            display5Day(data);
+        })
+    })
+}
+
+var display5Day = function(weather) {
+    fcstContainerEl.textContent = ""
+    fcstTitle.textContent = "5-Day Forecast:";
+
+    var fcst = weather.list;
+        for(var i=5; i < fcst.length; i=i+8) {
+            var dailyFcst = fcst[i];
+
+            // Create date element 
+            var fcstEl = document.createElement("h5")
+            fcstDate.textContent = moment.unix(dailyFcst.dt).format("MMM D, YYYY");
+            fcstDate.classList = "card-header text-center"
+            fcstEl.appendChild(fcstDate);
+
+            // Create image element
+            var weatherIcon = document.createElement("img")
+            weatherIcon.classList = "card-body text-center";
+            weatherIcon.setAttribute("src, 'https://openweathermap.org/img/wn/${dailyForecast.weather[0].icon}@2x.png'");
+
+            fcstEl.appendChild(weatherIcon);
+
+            // Create temp span
+            var fcstTempEl = document.createElement("span");
+            fcstTempEl.classList = "card-body text-center";
+            fcstTempEl.textContent = dailyFcst.main.temp + " °F";
+
+            fcstEl.appendChild(fcstTempEl);
+
+            var fcstHumEl = document.createElement("span");
+            fcstHumEl.classList = "card-body text-center";
+            fcstHumEl.textContent = dailyFcst.main.humidity + " %";
+
+            fcstEl.appendChild(fcstHumEl);
+
+            fcstContainerEl.appendChild(fcstEl);
+        }
+}
+
+// Event Listeners
 cityFormEl.addEventListener("submit", formSubmitHandler);
 pastSearchBtnEl.addEventListener("click", pastSearchHandler);
