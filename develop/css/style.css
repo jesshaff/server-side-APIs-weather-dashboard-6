@@ -1,6 +1,7 @@
 
 body {
-    background-image: url('/assets/weather-background.jpeg');
+    background-image: url("/assets/weather-background.jpeg");
+    background-color: lightblue;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
