@@ -143,7 +143,7 @@ var display5Day = function(weather) {
             var dailyFcst = fcst[i];
 
             var fcstEl = document.createElement("div");
-            fcstEl.classList = "card bg-dark text-light m2";
+            fcstEl.classList = "card bg-transparent text-dark m2";
 
             // Create date element 
             var fcstDate = document.createElement("h5")
@@ -167,7 +167,7 @@ var display5Day = function(weather) {
 
             var fcstHumEl = document.createElement("span");
             fcstHumEl.classList = "card-body text-center";
-            fcstHumEl.textContent = dailyFcst.main.humidity + "%";
+            fcstHumEl.textContent = dailyFcst.main.humidity + " %";
 
             fcstEl.appendChild(fcstHumEl);
 
