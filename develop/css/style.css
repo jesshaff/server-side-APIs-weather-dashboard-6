@@ -13,7 +13,7 @@ header {
 }
 
 .search-column {
-    background-color: white
+    background-color: transparent;
 }
 
 .list-group-item {
@@ -37,10 +37,32 @@ span.moderate {
 
 span.favorable {
     padding: 3px;
-    background-color: green;
+    background-color: lightgreen;
 }
 
 .container-fluid {
-    align-content:flex-end;
-    flex-wrap: wrap;
+    display: flex;
+    width: 80%;
+}
+
+.col-12 {
+    padding-right: 10%;
+}
+
+div {
+    background-color: transparent;
+    border: none;
+}
+
+#searched-city {
+    text-align: center;
+}
+
+#five-day-fcst {
+    text-align: center;
+}
+
+.list-group-item {
+    background-color: transparent;
+    text-align: center;
 }
